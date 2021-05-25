@@ -4,7 +4,10 @@
   "description": "Obtiene informacion sobre el visitante como el sistema operativo, version, tipo de dispositivo, entre otros",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "move-files": "powershell Move-Item -Force -Path dist\\* -Destination .; Remove-Item dist -Recurse",
+    "clean": "powershell Remove-Item types -Recurse; Remove-Item index.js; Remove-Item index.d.ts;"
   },
   "keywords": [
     "navegador",
@@ -12,7 +15,7 @@
     "informacion",
     "user-agent"
   ],
-  "author": "Alan Zatarain <soyzatarain@yandex.com>",
+  "author": "Alan Zatarain <ingsintitulo@icloud.com>",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@types/node": "^15.6.0"
