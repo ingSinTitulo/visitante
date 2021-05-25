@@ -16,6 +16,14 @@
     "user-agent"
   ],
   "author": "Alan Zatarain <ingsintitulo@icloud.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingSinTitulo/visitante.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ingSinTitulo/visitante/issues"
+  },
+  "homepage": "https://github.com/ingSinTitulo/visitante#readme",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@types/node": "^15.6.0"
