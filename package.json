@@ -1,0 +1,20 @@
+{
+  "name": "visitante",
+  "version": "0.6.0",
+  "description": "Obtiene informacion sobre el visitante como el sistema operativo, version, tipo de dispositivo, entre otros",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "navegador",
+    "cliente",
+    "informacion",
+    "user-agent"
+  ],
+  "author": "Alan Zatarain <soyzatarain@yandex.com>",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "@types/node": "^15.6.0"
+  }
+}
