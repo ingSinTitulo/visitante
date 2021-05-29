@@ -275,7 +275,8 @@ var Visitante = /** @class */ (function () {
         ['iPhone', /(iPhone)/],
         ['iPad', /(iPad)/],
         ['Android', /\(Linux;(?:\s*U;)?\s*Android\s*[\d\._]+;(?:\s*\w{2,3}-\w{2,3};)?\s*(.*?)\)\s*Apple/i],
-        ['Telefono', /(Mobile)/]
+        ['Telefono', /(Mobile)/],
+        ['ARM', /(armv7l)/]
     ];
     return Visitante;
 }());
