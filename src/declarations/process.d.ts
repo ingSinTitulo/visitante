@@ -1,6 +1,6 @@
 declare module 'process' {
     global {
-        var process: NodeJS.Process;
+        let process: NodeJS.Process;
 
         namespace NodeJS {
             type Platform = 'aix'
@@ -14,7 +14,7 @@ declare module 'process' {
                 | 'cygwin'
                 | 'netbsd';
 
-            interface Process extends EventEmitter {
+            interface Process {
                 platform: Platform;
             }
 
