@@ -1,4 +1,7 @@
 type Validacion = [string, RegExp];
+declare var Deno: any;
+type Navigator = { userAgent: string };
+declare var process: { platform: string };
 
 export default class Visitante {
 
@@ -8,7 +11,7 @@ export default class Visitante {
         [ 'Windows Phone', /Windows\sPhone/ ],
         [ 'Windows Mobile', /Windows\sMobile/ ],
         [ 'Windows 10 Mobile', /WhatsApp\/\d+\.\d+\.\d+ W/ ],
-        [ 'Windows NT', /(?:Windows\sNT)|(?:win32)|(?:cygwin)/ ],
+        [ 'Windows NT', /(?:Windows\sNT)|(?:win32)|(?:cygwin)|(?:windows)/ ],
         [ 'Windows', /Windows/ ],
         [ 'WebOS', /WebOS/ ],
         [ 'Watch OS', /(?:Watch\sOS)|(?:Watch\d,)/ ],
@@ -61,8 +64,7 @@ export default class Visitante {
             return this.userAgent;
         
         try {
-            let _ua = navigator.userAgent;
-            return this.userAgent = _ua;
+            return this.userAgent = Deno.build.os;
         }
         catch {
             try {
@@ -70,20 +72,31 @@ export default class Visitante {
                 return this.userAgent = _proc.platform;
             }
             catch {
-                return 'Desconocido'
+                try {
+                    let inicio = (navigator as unknown);
+                    let _ua = (inicio as Navigator)?.userAgent;
+                    return this.userAgent = _ua;
+                }
+                catch {
+                    return 'Desconocido';
+                }
             }
         }
     }
 
-    public static OS (userAgent?: string) {
+    private static parse (validaciones: Validacion[], userAgent?: string) {
         if (!userAgent || typeof userAgent !== 'string' || userAgent.length == 0) {
             userAgent = this.getUA();
         }
 
-        for (let validacion of this.__OS)
+        for (let validacion of validaciones)
             if (validacion[1].test(userAgent))
                 return validacion[0];
 
         return 'Desconocido';
+    }
+
+    public static OS (userAgent?: string) {
+        return this.parse(this.__OS, userAgent);
     }
 }

@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "move-files": "powershell Move-Item -Force -Path dist\\* -Destination .; Remove-Item dist -Recurse",
-    "clean": "powershell Remove-Item types -Recurse; Remove-Item index.js; Remove-Item index.d.ts;"
+    "clean": "powershell Remove-Item index.js; Remove-Item index.d.ts;"
   },
   "keywords": [
     "navegador",

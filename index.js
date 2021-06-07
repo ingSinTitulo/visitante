@@ -4,38 +4,48 @@ var Visitante = /** @class */ (function () {
     function Visitante() {
     }
     Visitante.getUA = function () {
+        var _a;
         if (this.userAgent && typeof this.userAgent === 'string' && this.userAgent.length > 0)
             return this.userAgent;
         try {
-            var _ua = navigator.userAgent;
-            return this.userAgent = _ua;
+            return this.userAgent = Deno.build.os;
         }
-        catch (_a) {
+        catch (_b) {
             try {
                 var _proc = process;
                 return this.userAgent = _proc.platform;
             }
-            catch (_b) {
-                return 'Desconocido';
+            catch (_c) {
+                try {
+                    var inicio = navigator;
+                    var _ua = (_a = inicio) === null || _a === void 0 ? void 0 : _a.userAgent;
+                    return this.userAgent = _ua;
+                }
+                catch (_d) {
+                    return 'Desconocido';
+                }
             }
         }
     };
-    Visitante.OS = function (userAgent) {
+    Visitante.parse = function (validaciones, userAgent) {
         if (!userAgent || typeof userAgent !== 'string' || userAgent.length == 0) {
             userAgent = this.getUA();
         }
-        for (var _i = 0, _a = this.__OS; _i < _a.length; _i++) {
-            var validacion = _a[_i];
+        for (var _i = 0, validaciones_1 = validaciones; _i < validaciones_1.length; _i++) {
+            var validacion = validaciones_1[_i];
             if (validacion[1].test(userAgent))
                 return validacion[0];
         }
         return 'Desconocido';
     };
+    Visitante.OS = function (userAgent) {
+        return this.parse(this.__OS, userAgent);
+    };
     Visitante.__OS = [
         ['Windows Phone', /Windows\sPhone/],
         ['Windows Mobile', /Windows\sMobile/],
         ['Windows 10 Mobile', /WhatsApp\/\d+\.\d+\.\d+ W/],
-        ['Windows NT', /(?:Windows\sNT)|(?:win32)|(?:cygwin)/],
+        ['Windows NT', /(?:Windows\sNT)|(?:win32)|(?:cygwin)|(?:windows)/],
         ['Windows', /Windows/],
         ['WebOS', /WebOS/],
         ['Watch OS', /(?:Watch\sOS)|(?:Watch\d,)/],
