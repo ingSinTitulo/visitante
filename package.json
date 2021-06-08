@@ -1,6 +1,6 @@
 {
   "name": "visitante",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "Obtiene informacion sobre el visitante como el sistema operativo, version, tipo de dispositivo, entre otros",
   "main": "index.js",
   "scripts": {
