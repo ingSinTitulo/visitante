@@ -1,5 +1,6 @@
 type Validacion = [string, RegExp];
 declare var Deno: any;
+declare var navigator: Navigator;
 type Navigator = { userAgent: string };
 declare var process: { platform: string };
 
@@ -14,7 +15,7 @@ export default class Visitante {
         [ 'Windows NT', /(?:Windows\sNT)|(?:win32)|(?:cygwin)|(?:windows)/ ],
         [ 'Windows', /Windows/ ],
         [ 'WebOS', /WebOS/ ],
-        [ 'Watch OS', /(?:Watch\sOS)|(?:Watch\d,)/ ],
+        [ 'WatchOS', /(?:Watch\sOS)|(?:Watch\d,)/ ],
         [ 'tvOS', /[\s\(-]tvos/i ],
         [ 'Series40', /Series40/ ],
         [ 'Series60', /(?:Series60)|(?:\ss60-[a-z])/ ],
@@ -31,7 +32,7 @@ export default class Visitante {
         [ 'OpenBSD', /OpenBSD/i ],
         [ 'NetBSD', /NetBSD/i ],
         [ 'macOS', /(?:Mac\sOS)|(?:Mac_PowerPC)/i ],
-        [ 'PlayStation Vita System Sopftware', /PlayStation\sVita/ ],
+        [ 'PlayStation Vita System Software', /PlayStation\sVita/ ],
         [ 'Ubuntu', /Ubuntu/ ],
         [ 'Red Hat Enterprise Linux', /Red\sHat\sEnterprise(?:\sLinux)?/ ],
         [ 'Red Hat', /Red\sHat/ ],
