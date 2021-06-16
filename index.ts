@@ -9,11 +9,10 @@ export default class Visitante {
     private static userAgent: string;
 
     private static readonly __OS: Validacion[] = [
-        [ 'Windows Phone', /Windows\sPhone/ ],
-        [ 'Windows Mobile', /Windows\sMobile/ ],
-        [ 'Windows 10 Mobile', /WhatsApp\/\d+\.\d+\.\d+ W/ ],
-        [ 'Windows NT', /(?:Windows\sNT)|(?:win32)|(?:cygwin)|(?:windows)/ ],
-        [ 'Windows', /Windows/ ],
+        [ 'Windows Phone', /Windows\sPhone\s([\d\.]+)/ ],
+        [ 'Windows Mobile', /(?:(?:Windows\sMobile)|(?:WhatsApp\/\d+\.\d+\.\d+ W))(?:\s([\d\.]+))?/ ],
+        [ 'Windows NT', /(?:(?:Windows\sNT)|(?:win32)|(?:cygwin)|(?:windows))(?:\s([\d\.]+))?/ ],
+        [ 'Windows', /Windows(?:\s([\d\.]+))?/ ],
         [ 'WebOS', /WebOS/ ],
         [ 'WatchOS', /(?:Watch\sOS)|(?:Watch\d,)/ ],
         [ 'tvOS', /[\s\(-]tvos/i ],
@@ -47,17 +46,49 @@ export default class Visitante {
         [ 'Glass OS', /Glass\s1/ ],
         [ 'FreeBSD', /FreeBSD/i ],
         [ 'FireOS', /(?:Silk)|(?:KFSUWI)|(?:Kindle\sFire)/ ],
-        [ 'ChromeOS', /CrOS/ ],
+        [ 'ChromeOS', /(?:CrOS)|(?:CrKey)/ ],
         [ 'BlackBerry OS', /(?:BlackBerry)|(?:BB10)/ ],
         [ 'BeOS', /BeOS/i ],
         [ 'Bada', /Bada/ ],
+        [ 'Android x86', /Android\sx86/ ],
         [ 'Android', /Android/i ],
+        [ 'Vector Linux', /vectorlinux/ ],
+        [ 'Arch Linux', /arch\slinux/i ],
         [ 'Linux', /Linux/i ],
         [ 'AmigaOS', /AmigaOS/ ],
         [ 'AIX', /AIX/i ],
-        [ 'Unix', /(?:X11)|(?:UNIX)/ ],
         [ 'MeeGo', /MeeGo/ ],
-        [ 'BingBot', /bingbot/ ]
+        [ 'Maemo', /Maemo/i ],
+        [ 'Tizen', /Tizen/i ],
+        [ 'QNX', /QNX/i ],
+        [ 'Sailfish OS', /sailfish/i ],
+        [ 'Firefox OS', /Mobile.*?Firefox/ ],
+        [ 'Mageia Linux', /Mageia/i ],
+        [ 'Suse Linux', /(?:open)?suse/i ],
+        [ 'Gentoo Linux', /gentoo/i ],
+        [ 'Salckware Linux', /slackware/i ],
+        [ 'Fedora Linux', /fedora/i ],
+        [ 'Mandriva Linux', /mandriva/i ],
+        [ 'CentOS Linux', /centos/i ],
+        [ 'PCLinuxOS', /pclinuxos/i ],
+        [ 'Zenwalk Linux', /zenwalk/i ],
+        [ 'Linpus Linux', /linpus/i ],
+        [ 'Raspbian', /raspbian/i ],
+        [ 'Plan 9', /plan\s9/i ],
+        [ 'Minix', /minix/i ],
+        [ 'Contiki', /contiki/i ],
+        [ 'Deepin Linux', /deepin/i ],
+        [ 'Manjaro Linux', /manjaro/i ],
+        [ 'Elementary OS', /elementary\sos/i ],
+        [ 'Sabayon', /sabayon/i ],
+        [ 'GNU', /gnu/i ],
+        [ 'Hurd', /hurd/i ],
+        [ 'Solaris', /(?:open)?solaris/i ],
+        [ 'MorphOS', /morphos/i ],
+        [ 'OpenVMS', /openvms/i ],
+        [ 'HP-UX', /hp-ux/i ],
+        [ 'Fuchsia', /fuchsia/i ],
+        [ 'Unix', /(?:X11)|(?:UNIX)|(?:[Uu]nix)/ ]
     ];
 
     private static getUA (): string {
@@ -90,9 +121,12 @@ export default class Visitante {
             userAgent = this.getUA();
         }
 
-        for (let validacion of validaciones)
-            if (validacion[1].test(userAgent))
-                return validacion[0];
+        for (let validacion of validaciones) {
+            let resultado = validacion[1].exec(userAgent);
+            if (resultado !== null) {
+                return [validacion[0], resultado[1]];
+            }
+        }
 
         return 'Desconocido';
     }
