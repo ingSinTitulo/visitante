@@ -88,7 +88,8 @@ export default class Visitante {
         [ 'OpenVMS', /openvms/i ],
         [ 'HP-UX', /hp-ux/i ],
         [ 'Fuchsia', /fuchsia/i ],
-        [ 'Unix', /(?:X11)|(?:UNIX)|(?:[Uu]nix)/ ]
+        [ 'Unix', /(?:X11)|(?:UNIX)|(?:[Uu]nix)/ ],
+        [ 'Other', /\w{7}/i ]
     ];
 
     private static getUA (): string {
