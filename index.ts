@@ -111,7 +111,7 @@ export default class Visitante {
                     return this.userAgent = _ua;
                 }
                 catch {
-                    return 'Desconocido';
+                    return 'Unknown';
                 }
             }
         }
@@ -129,7 +129,7 @@ export default class Visitante {
             }
         }
 
-        return 'Desconocido';
+        return 'Unknown';
     }
 
     public static OS (userAgent?: string) {
